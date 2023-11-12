@@ -5,19 +5,20 @@
 // Implementações das funções
 
 
-MatrizEsparsa* leMatriz(const char* nomeArquivo, int linhas, int colunas) {
+MatrizEsparsa* leMatriz(const char* nomeArquivo) {
     FILE* arquivo = fopen(nomeArquivo, "r");
     if (!arquivo) {
-        printf("Não foi possível abrir o arquivo.\n");
+        printf("Nao foi possível abrir o arquivo %s.\n", nomeArquivo);
         return NULL;
     }
 
-
-
+    int linhas, colunas;
+    fscanf(arquivo, "%d %d", &linhas, &colunas);
 
     MatrizEsparsa* matriz = criaMatriz(linhas, colunas);
     if (!matriz) {
         fclose(arquivo);
+        printf("Erro ao criar a matriz.\n");
         return NULL;
     }
 
@@ -37,13 +38,13 @@ MatrizEsparsa* leMatriz(const char* nomeArquivo, int linhas, int colunas) {
 
 void escreveMatriz(const char* nomeArquivo, MatrizEsparsa* matriz) {
     if (!matriz) {
-        printf("Matriz não inicializada.\n");
+        printf("Matriz nao inicializada.\n");
         return;
     }
 
     FILE* arquivo = fopen(nomeArquivo, "w");
     if (!arquivo) {
-        printf("Não foi possível abrir o arquivo para escrita.\n");
+        printf("Nao foi possivel abrir o arquivo para escrita.\n");
         return;
     }
 
@@ -72,7 +73,7 @@ MatrizEsparsa* criaMatriz(int linhas, int colunas) {
 
     // Verifica se a alocação de memória foi bem-sucedida
     if (!novaMatriz) {
-        printf("Erro de alocação de memória.\n");
+        printf("Erro de alocacao de memoria.\n");
         return NULL;
     }
 
@@ -82,7 +83,7 @@ MatrizEsparsa* criaMatriz(int linhas, int colunas) {
     // Criação da célula cabeça
     novaMatriz->cabeca = (Celula*) malloc(sizeof(Celula));
     if (!novaMatriz->cabeca) {
-        printf("Erro de alocação de memória.\n");
+        printf("Erro de alocacao de memoria.\n");
         free(novaMatriz);
         return NULL;
     }
@@ -99,13 +100,13 @@ MatrizEsparsa* criaMatriz(int linhas, int colunas) {
 // Exemplo: insere
 void insere(MatrizEsparsa* matriz, int linha, int coluna, float valor) {
     if (!matriz || linha >= matriz->linhas || coluna >= matriz->colunas) {
-        printf("Posição inválida ou matriz não inicializada.\n");
+        printf("Posicao invalida ou matriz nao inicializada.\n");
         return;
     }
 
     Celula *nova = (Celula*) malloc(sizeof(Celula));
     if (!nova) {
-        printf("Erro de alocação de memória.\n");
+        printf("Erro de alocacao de memoria.\n");
         return;
     }
 
@@ -141,7 +142,7 @@ void insere(MatrizEsparsa* matriz, int linha, int coluna, float valor) {
 // Exemplo: imprimeMatriz
 void imprimeMatriz(MatrizEsparsa* matriz) {
     if (!matriz) {
-        printf("Matriz não inicializada.\n");
+        printf("Matriz nao inicializada.\n");
         return;
     }
 
@@ -166,7 +167,7 @@ void imprimeMatriz(MatrizEsparsa* matriz) {
 // Exemplo: destroiMatriz
 void destroiMatriz(MatrizEsparsa* matriz) {
     if (!matriz) {
-        printf("Matriz não inicializada ou já destruída.\n");
+        printf("Matriz nao inicializada ou ja destruida.\n");
         return;
     }
 
@@ -214,12 +215,12 @@ float getValor(MatrizEsparsa* matriz, int linha, int coluna) {
 
 MatrizEsparsa* somaMatrizes(MatrizEsparsa* A, MatrizEsparsa* B) {
     if (!A || !B) {
-        printf("Uma ou ambas as matrizes não estão inicializadas.\n");
+        printf("Uma ou ambas as matrizes nao estao inicializadas.\n");
         return NULL;
     }
 
     if (A->linhas != B->linhas || A->colunas != B->colunas) {
-        printf("Matrizes de dimensões diferentes não podem ser somadas.\n");
+        printf("Matrizes de dimensoes diferentes nao podem ser somadas.\n");
         return NULL;
     }
 
@@ -243,12 +244,12 @@ MatrizEsparsa* somaMatrizes(MatrizEsparsa* A, MatrizEsparsa* B) {
 
 MatrizEsparsa* multiplicaMatrizes(MatrizEsparsa* A, MatrizEsparsa* B) {
     if (!A || !B) {
-        printf("Uma ou ambas as matrizes não estão inicializadas.\n");
+        printf("Uma ou ambas as matrizes não estao inicializadas.\n");
         return NULL;
     }
 
     if (A->colunas != B->linhas) {
-        printf("Matrizes com dimensões incompatíveis para multiplicação.\n");
+        printf("Matrizes com dimensoes incompativeis para multiplicacao.\n");
         return NULL;
     }
 
@@ -274,4 +275,9 @@ MatrizEsparsa* multiplicaMatrizes(MatrizEsparsa* A, MatrizEsparsa* B) {
     return C;
 }
 
+
+void limparBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+}
 
