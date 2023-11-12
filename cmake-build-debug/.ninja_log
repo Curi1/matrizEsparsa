@@ -1,0 +1,10 @@
+# ninja log v5
+1	169	7214411689621435	CMakeFiles/matrizEsparsa.dir/main.c.obj	92709c967f78f779
+2	146	7214413061201953	CMakeFiles/matrizEsparsa.dir/matriz.c.obj	6d6138600fa9b748
+147	362	7214413063358996	matrizEsparsa.exe	b6cb5139a0216370
+3	103	7214423540900515	CMakeFiles/matrizEsparsa.dir/main.c.obj	92709c967f78f779
+103	287	7214423542744208	matrizEsparsa.exe	b6cb5139a0216370
+2	88	7214423688232583	CMakeFiles/matrizEsparsa.dir/main.c.obj	92709c967f78f779
+88	255	7214423689898130	matrizEsparsa.exe	b6cb5139a0216370
+2	97	7214424367305591	CMakeFiles/matrizEsparsa.dir/main.c.obj	92709c967f78f779
+97	261	7214424368941457	matrizEsparsa.exe	b6cb5139a0216370
